@@ -13,5 +13,6 @@ terraform {
     storage_account_name = "group11githubactions"
     container_name       = "tfstate"
     key                  = "prod.app.tfstate"
+    use_oidc             = true
   }
 }
