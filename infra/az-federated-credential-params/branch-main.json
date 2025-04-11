@@ -1,0 +1,8 @@
+{
+    "name": "branch-main",
+    "issuer": "https://token.actions.githubusercontent.com",
+    "subject": "repo:Aakanksha-Pharande/cst8918-final-project:branch:main",
+    "description": "CST8918 Final Project - Main Branch Access",
+    "audiences": ["api://AzureADTokenExchange"]
+  }
+  
