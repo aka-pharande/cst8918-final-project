@@ -18,9 +18,7 @@ resource "azurerm_kubernetes_cluster" "test" {
 
   kubernetes_version = "1.32.0"
 
-  role_based_access_control {
-    enabled = true
-  }
+  role_based_access_control_enabled = true
 
   network_profile {
     network_plugin = "azure"
@@ -58,9 +56,7 @@ resource "azurerm_kubernetes_cluster" "prod" {
 
   kubernetes_version = "1.32.0"
 
-  role_based_access_control {
-    enabled = true
-  }
+  role_based_access_control_enabled = true
 
   network_profile {
     network_plugin = "azure"
@@ -68,7 +64,7 @@ resource "azurerm_kubernetes_cluster" "prod" {
   }
 
   api_server_access_profile {
-    authorized_ip_ranges = ["<your-ip>/32"] # Replace with your actual IP
+    authorized_ip_ranges = ["0.0.0.0/0"]
   }
 
   tags = {
