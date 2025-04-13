@@ -3,11 +3,11 @@ module "network" {
   location = var.location
 }
 
-# defsec:ignore:azure-container-logging
+# tfsec:ignore:azure-container-logging
 # OMS Agent is deprecated and not required per assignment instructions. 
 # Logging via Diagnostic Settings can be added if needed, but is omitted to reduce Azure costs.
 
-# defsec:ignore:azure-container-limit-authorized-ips
+# tfsec:ignore:azure-container-limit-authorized-ips
 # This is a false positive — we have already configured authorized IP ranges using api_server_access_profile.
 module "aks" {
   source              = "./modules/aks"
