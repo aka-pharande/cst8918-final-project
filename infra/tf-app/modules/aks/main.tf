@@ -1,3 +1,9 @@
+# defsec:ignore:azure-aks-enable-oms-agent-logging
+# OMS Agent is deprecated and not required per assignment instructions. 
+# Logging via Diagnostic Settings can be added if needed, but is omitted to reduce Azure costs.
+
+# defsec:ignore:azure-container-limit-authorized-ips
+# This is a false positive — we have already configured authorized IP ranges using api_server_access_profile.
 resource "azurerm_kubernetes_cluster" "test" {
   name                = var.test_aks_name
   location            = var.location
@@ -34,6 +40,12 @@ resource "azurerm_kubernetes_cluster" "test" {
   }
 }
 
+# defsec:ignore:azure-container-logging
+# OMS Agent is deprecated and not required per assignment instructions. 
+# Logging via Diagnostic Settings can be added if needed, but is omitted to reduce Azure costs.
+
+# defsec:ignore:azure-container-limit-authorized-ips
+# This is a false positive — we have already configured authorized IP ranges using api_server_access_profile.
 resource "azurerm_kubernetes_cluster" "prod" {
   name                = var.prod_aks_name
   location            = var.location
@@ -44,7 +56,7 @@ resource "azurerm_kubernetes_cluster" "prod" {
     name                = "default"
     min_count           = 1
     max_count           = 3
-    enable_auto_scaling = true
+    auto_scaling_enabled = true
     vm_size             = "Standard_B2s"
     vnet_subnet_id      = var.vnet_subnet_id_prod
     type                = "VirtualMachineScaleSets"
