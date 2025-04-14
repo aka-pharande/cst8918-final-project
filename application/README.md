@@ -1,4 +1,4 @@
-CST8918 - DevOps: Infrastructure as Code 
+CST8918 - DevOps: Infrastructure as Code
 Prof: Robert McKenney
 
 # LAB-A01 Weather App
