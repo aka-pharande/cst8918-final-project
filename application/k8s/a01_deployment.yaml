@@ -20,7 +20,7 @@ spec:
       containers:
         - name: weather-app-container
           # this is the Docker image that you created
-          image: akapharande/cst8918-a01-weather-app
+          image: fp11weatheracr.azurecr.io/remix-weather-app
           ports:
             - containerPort: 8080
           env:
