@@ -1,0 +1,53 @@
+name: Deploy to AKS Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'application/**'
+
+env:
+  IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+  ACR_LOGIN_SERVER: ${{ vars.ACR_LOGIN_SERVER }}
+  AKS_NAME: ${{ vars.AKS_NAME }}
+  AKS_RESOURCE_GROUP: ${{ vars.AKS_RESOURCE_GROUP }}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-test:
+    name: Deploy to AKS Test
+    runs-on: ubuntu-latest
+    environment: test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Get AKS Credentials
+        run: |
+          az aks get-credentials \
+            --name $AKS_NAME \
+            --resource-group $AKS_RESOURCE_GROUP \
+            --overwrite-existing
+
+      - name: Set Image in Deployment YAML
+        run: |
+          sed -i "s|<IMAGE_PLACEHOLDER>|$ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }}|g" application/k8s/deployment.yaml
+
+      - name: Deploy to AKS
+        run: |
+          kubectl apply -f application/k8s/namespace.yaml
+          kubectl apply -f application/k8s/secret.yaml
+          kubectl apply -f application/k8s/deployment.yaml
+          kubectl apply -f application/k8s/service.yaml
