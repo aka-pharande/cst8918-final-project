@@ -26,7 +26,7 @@ resource "azurerm_redis_cache" "redis_test" {
 
   sku_name = "Basic"
 
-  enable_non_ssl_port = true
+  non_ssl_port_enabled = true
 
 }
 
@@ -44,7 +44,9 @@ resource "azurerm_redis_cache" "redis_prod" {
 
   sku_name = "Basic"
 
-  enable_non_ssl_port = true
+  non_ssl_port_enabled = true
+
+
 
 }
 
