@@ -39,7 +39,7 @@ jobs:
 
       - name: Docker Build
         run: |
-          docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }} .
+          docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }} ./application
           docker tag $ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }} $ACR_LOGIN_SERVER/$IMAGE_NAME:latest
 
       - name: Docker Push
