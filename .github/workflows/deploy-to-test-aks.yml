@@ -43,7 +43,7 @@ jobs:
 
       - name: Set Image in Deployment YAML
         run: |
-          sed -i "s|<IMAGE_PLACEHOLDER>|$ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }}|g" application/k8s/deployment.yaml
+          sed -i "s|<IMAGE_PLACEHOLDER>|$ACR_LOGIN_SERVER/$IMAGE_NAME:${{ github.sha }}|g" application/k8s/a01_deployment.yaml
 
       - name: Deploy to AKS
         run: |
