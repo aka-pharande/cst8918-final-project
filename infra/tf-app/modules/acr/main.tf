@@ -51,3 +51,16 @@ resource "azurerm_redis_cache" "redis_prod" {
 }
 
  
+ # Grant ACR Pull access to AKS Test cluster
+resource "azurerm_role_assignment" "aks_test_acr_pull" {
+  principal_id         = var.test_aks_identity_id
+  role_definition_name = "AcrPull"
+  scope                = azurerm_container_registry.weather_app_acr.id
+}
+
+# Grant ACR Pull access to AKS Prod cluster
+resource "azurerm_role_assignment" "aks_prod_acr_pull" {
+  principal_id         = var.prod_aks_identity_id
+  role_definition_name = "AcrPull"
+  scope                = azurerm_container_registry.weather_app_acr.id
+}

@@ -14,10 +14,12 @@ module "aks" {
 }
 
 module "acr" {
-  source              = "./modules/acr"
-  location            = var.location
-  resource_group_name = module.network.resource_group_name
-  acr_name            = "fp11weatheracr"
-  redis_test_name     = "fp11redistest"
-  redis_prod_name     = "fp11redisprod"
+  source                  = "./modules/acr"
+  location                = var.location
+  resource_group_name     = module.network.resource_group_name
+  acr_name                = "fp11weatheracr"
+  redis_test_name         = "fp11redistest"
+  redis_prod_name         = "fp11redisprod"
+  test_aks_identity_id    = module.aks.test_aks_identity_id
+  prod_aks_identity_id    = module.aks.prod_aks_identity_id
 }
