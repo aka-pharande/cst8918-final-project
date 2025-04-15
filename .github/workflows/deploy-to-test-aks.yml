@@ -48,5 +48,6 @@ jobs:
       - name: Deploy to AKS
         run: |
           kubectl apply -f application/k8s/a01_namespace.yaml
+          kubectl apply -f application/k8s/a01_secrets.yaml
           kubectl apply -f application/k8s/a01_deployment.yaml
           kubectl apply -f application/k8s/a01_service.yaml
