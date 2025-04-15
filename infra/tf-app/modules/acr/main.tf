@@ -50,8 +50,8 @@ resource "azurerm_redis_cache" "redis_prod" {
 
 }
 
- 
- # Grant ACR Pull access to AKS Test cluster
+
+# Grant ACR Pull access to AKS Test cluster
 resource "azurerm_role_assignment" "aks_test_acr_pull" {
   principal_id         = var.test_aks_identity_id
   role_definition_name = "AcrPull"
