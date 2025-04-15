@@ -1,4 +1,4 @@
-name: Build and Deploy Remix App
+name: Build and Push Remix App
 
 on:
   pull_request:
